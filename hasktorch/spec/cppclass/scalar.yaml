@@ -1,0 +1,12 @@
+signature: Scalar
+cppname: at::Scalar
+hsname: Scalar
+headers:
+- ATen/Scalar.h
+- vector
+functions: []
+constructors:
+- new() -> Scalar
+- new(int a) -> Scalar
+- new(double a) -> Scalar
+methods: []

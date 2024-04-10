@@ -1,0 +1,88 @@
+signature: Tensor
+cppname: at::Tensor
+hsname: Tensor
+headers:
+- ATen/Tensor.h
+- ATen/Functions.h
+- ATen/TensorOperators.h
+- vector
+functions: []
+constructors:
+- new() -> Tensor
+- new(Tensor x) -> Tensor
+methods:
+- __dispatch_contiguous() -> Tensor
+- backward(Tensor  gradient={}, bool keep_graph=false, bool create_graph=false) -> void
+- contiguous() -> Tensor
+- cpu() -> Tensor
+- cuda() -> Tensor
+- data_ptr() -> void*
+- defined() -> bool
+- dim() -> int64_t
+- element_size() -> int64_t
+- fw_grad(uint64_t level) -> Tensor
+- get_device() -> int64_t
+- has_names() -> bool
+- has_storage() -> bool
+- hip() -> Tensor
+- is_alias_of(Tensor other) -> bool
+- is_contiguous() -> bool
+- is_cuda() -> bool
+- is_hip() -> bool
+- is_meta() -> bool
+- is_metal() -> bool
+- is_mkldnn() -> bool
+- is_non_overlapping_and_dense() -> bool
+- is_quantized() -> bool
+- is_same(Tensor other) -> bool
+- is_sparse() -> bool
+- is_vulkan() -> bool
+- is_xpu() -> bool
+- item<double>() -> double
+- item<float>() -> float
+- item<int64_t>() -> int64_t
+- itemsize() -> size_t
+- layout() -> Layout
+- metal() -> Tensor
+- mutable_grad() -> Tensor
+- nbytes() -> size_t
+- ndimension() -> int64_t
+- numel() -> int64_t
+- operator*=(Scalar other) -> void
+- operator*=(Tensor  other) -> void
+- operator+=(Scalar other) -> void
+- operator+=(Tensor  other) -> void
+- operator-=(Scalar other) -> void
+- operator-=(Tensor  other) -> void
+- operator/=(Scalar other) -> void
+- operator/=(Tensor  other) -> void
+- operator=(Tensor x) -> Tensor
+- operator[](Scalar index) -> Tensor
+- operator[](Tensor index) -> Tensor
+- operator[](int64_t index) -> Tensor
+- options() -> TensorOptions
+- print() -> void
+- requires_grad() -> bool
+- reset() -> void
+- resize_(IntArrayRef size) -> Tensor
+- scalar_type() -> ScalarType
+- set_fw_grad(Tensor new_grad, uint64_t level, bool is_inplace_op) -> void
+- set_requires_grad(bool requires_grad) -> Tensor
+- size(int64_t dim) -> int64_t
+- sizes() -> IntArrayRef
+- storage() -> Storage
+- storage_offset() -> int64_t
+- stride(int64_t dim) -> int64_t
+- strides() -> IntArrayRef
+- to(Device device, ScalarType dtype, bool non_blocking=false, bool copy=false) -> Tensor
+- to(ScalarType dtype, bool non_blocking=false, bool copy=false) -> Tensor
+- to(Tensor  other, bool non_blocking=false, bool copy=false) -> Tensor
+- to(TensorOptions  options, bool non_blocking=false, bool copy=false) -> Tensor
+- toBackend(Backend b) -> Tensor
+- toString() -> std::string
+- toType(ScalarType t) -> Tensor
+- to_dense() -> Tensor
+- to_mkldnn() -> Tensor
+- use_count() -> size_t
+- vulkan() -> Tensor
+- weak_use_count() -> size_t

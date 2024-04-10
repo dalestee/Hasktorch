@@ -1,0 +1,319 @@
+cabal-version:       2.2
+name:                hasktorch-gradually-typed
+version:             0.2.0.0
+synopsis:            experimental project for hasktorch
+-- description:
+homepage:            https://github.com/hasktorch/hasktorch#readme
+license:             BSD-3-Clause
+author:              Austin Huang
+maintainer:          hasktorch@gmail.com
+copyright:           2021 Austin Huang
+category:            Machine Learning
+build-type:          Custom
+
+custom-setup
+  setup-depends:
+      base >= 4.9 && < 5
+    , Cabal
+    , cabal-doctest >=1.0.6 && <1.1
+
+Flag disable-doctest
+ Description: Disable doctest.
+ Default:     False
+ Manual:      True
+
+library
+  exposed-modules:     Torch.GraduallyTyped
+                     , Torch.GraduallyTyped.Prelude
+                     , Torch.GraduallyTyped.Prelude.List
+                     , Torch.GraduallyTyped.Prelude.Maybe
+                     , Torch.GraduallyTyped.Prelude.TypeLits
+                     , Torch.GraduallyTyped.Prelude.Bool
+                     , Torch.GraduallyTyped.Unify
+                     , Torch.GraduallyTyped.Scalar
+                     , Torch.GraduallyTyped.Tensor
+                     , Torch.GraduallyTyped.Tensor.Type
+                     , Torch.GraduallyTyped.Tensor.Creation
+                     , Torch.GraduallyTyped.Tensor.Indexing
+                     , Torch.GraduallyTyped.Tensor.IndexingSlicingJoining
+                     , Torch.GraduallyTyped.Tensor.Other
+                     , Torch.GraduallyTyped.Tensor.MathOperations
+                     , Torch.GraduallyTyped.Tensor.MathOperations.Pointwise
+                     , Torch.GraduallyTyped.Tensor.MathOperations.Reduction
+                     , Torch.GraduallyTyped.Tensor.MathOperations.Comparison
+                     , Torch.GraduallyTyped.Tensor.MathOperations.Spectral
+                     , Torch.GraduallyTyped.Tensor.MathOperations.Other
+                     , Torch.GraduallyTyped.Tensor.MathOperations.BlasLapack
+                     , Torch.GraduallyTyped.RequiresGradient
+                     , Torch.GraduallyTyped.DType
+                     , Torch.GraduallyTyped.Device
+                     , Torch.GraduallyTyped.Index
+                     , Torch.GraduallyTyped.Index.Type
+                     , Torch.GraduallyTyped.Index.Class
+                     , Torch.GraduallyTyped.Shape
+                     , Torch.GraduallyTyped.Shape.Type
+                     , Torch.GraduallyTyped.Shape.Class
+                     , Torch.GraduallyTyped.Layout
+                     , Torch.GraduallyTyped.Autograd
+                     , Torch.GraduallyTyped.Random
+                     , Torch.GraduallyTyped.Optim
+                     , Torch.GraduallyTyped.LearningRateSchedules
+                     , Torch.GraduallyTyped.NN
+                     , Torch.GraduallyTyped.NN.Type
+                     , Torch.GraduallyTyped.NN.Class
+                     , Torch.GraduallyTyped.NN.Initialization
+                     , Torch.GraduallyTyped.NN.Linear
+                     , Torch.GraduallyTyped.NN.Transformer
+                     , Torch.GraduallyTyped.NN.Transformer.Type
+                     , Torch.GraduallyTyped.NN.Transformer.GMultiHeadAttention
+                     , Torch.GraduallyTyped.NN.Transformer.GFeedForwardNetwork
+                     , Torch.GraduallyTyped.NN.Transformer.GSelfAttention
+                     , Torch.GraduallyTyped.NN.Transformer.GCrossAttention
+                     , Torch.GraduallyTyped.NN.Transformer.GBlock
+                     , Torch.GraduallyTyped.NN.Transformer.GStack
+                     , Torch.GraduallyTyped.NN.Transformer.GTransformer
+                     , Torch.GraduallyTyped.NN.Transformer.GLMHead
+                     , Torch.GraduallyTyped.NN.Transformer.GEncoderOnly
+                     , Torch.GraduallyTyped.NN.Transformer.GEncoderDecoder
+                     , Torch.GraduallyTyped.NN.Transformer.GPooler
+                     , Torch.GraduallyTyped.NN.Transformer.T5.Common
+                     , Torch.GraduallyTyped.NN.Transformer.T5.Small
+                     , Torch.GraduallyTyped.NN.Transformer.T5.Base
+                     , Torch.GraduallyTyped.NN.Transformer.T5.Large
+                     , Torch.GraduallyTyped.NN.Transformer.T5.ThreeB
+                     , Torch.GraduallyTyped.NN.Transformer.T5.ElevenB
+                     , Torch.GraduallyTyped.NN.Transformer.T5.Generation
+                     , Torch.GraduallyTyped.NN.Transformer.T5
+                     , Torch.GraduallyTyped.NN.Transformer.BART.Common
+                     , Torch.GraduallyTyped.NN.Transformer.BART.Base
+                     , Torch.GraduallyTyped.NN.Transformer.BART.Large
+                     , Torch.GraduallyTyped.NN.Transformer.BART
+                     , Torch.GraduallyTyped.NN.Transformer.BERT.Common
+                     , Torch.GraduallyTyped.NN.Transformer.BERT.BaseUncased
+                     , Torch.GraduallyTyped.NN.Transformer.BERT
+                     , Torch.GraduallyTyped.NN.Transformer.RoBERTa.Common
+                     , Torch.GraduallyTyped.NN.Transformer.RoBERTa.Base
+                     , Torch.GraduallyTyped.NN.Transformer.RoBERTa
+                     , Torch.GraduallyTyped.NN.Transformer.Pegasus.Common
+                     , Torch.GraduallyTyped.NN.Transformer.Pegasus.XSum
+                     , Torch.GraduallyTyped.NN.Transformer.Pegasus
+                     , Torch.GraduallyTyped.NN.Transformer.Generation
+                     , Torch.GraduallyTyped.NN.Dropout
+                     , Torch.GraduallyTyped.NN.Activation
+                     , Torch.GraduallyTyped.NN.Normalization
+                     , Torch.GraduallyTyped.NN.Sparse
+                     , Torch.GraduallyTyped.NN.Loss
+                     , Torch.GraduallyTyped.NN.Training
+                     , Torch.GraduallyTyped.NN.Functional
+                     , Torch.GraduallyTyped.NN.Functional.Dropout
+                     , Torch.GraduallyTyped.NN.Functional.Activation
+                     , Torch.GraduallyTyped.NN.Functional.Linear
+                     , Torch.GraduallyTyped.NN.Functional.NonLinearActivation
+                     , Torch.GraduallyTyped.NN.Functional.Normalization
+                     , Torch.GraduallyTyped.NN.Functional.Sparse
+                     , Torch.GraduallyTyped.NN.Functional.Loss
+                     , Torch.GraduallyTyped.Internal.TensorOptions
+                     , Torch.GraduallyTyped.Internal.Void
+                     , Torch.GraduallyTyped.Internal.Vector
+                     , Torch.Language
+                     , Torch.Language.SpiderSQL
+                     , Torch.Data.Parser
+                     , Control.Monad.Fresh
+  hs-source-dirs:      src
+  default-language:    Haskell2010
+  ghc-options:         -Wall -fplugin GHC.TypeLits.Normalise -fplugin GHC.TypeLits.KnownNat.Solver -fplugin GHC.TypeLits.Extra.Solver -fconstraint-solver-iterations=0
+  build-depends:       base >= 4.7 && < 5
+                     , hasktorch
+                     , libtorch-ffi == 2.0.*
+                     , ghc-typelits-extra
+                     , ghc-typelits-knownnat
+                     , ghc-typelits-natnormalise
+                     , typelevel-rewrite-rules
+                     , exceptions
+                     , mtl
+                     , stm
+                     , text
+                     , containers
+                     , vector
+                     , vector-sized
+                     , generics-sop
+                     , type-errors-pretty
+                     , indexed
+                     , indexed-extras
+                     , free
+                     , lens
+                     , generic-lens
+                     , logict
+                     , normaldistribution
+                     , parsers
+                     , pipes
+                     , pipes-group
+                     , pipes-concurrency
+                     , random
+                     , tokenizers
+                     , vector
+                     , vector-sized
+                     , finite-typelits
+                     , indexed-list-literals
+                     , exceptions
+                     , template-haskell
+                     , megaparsec
+                     , mmorph
+                     , transformers
+                     , hedgehog
+  if impl(ghc >= 9.0)
+    build-depends:     singletons == 3.*
+                     , singletons-base
+                     , singletons-th
+  else
+    build-depends:     singletons < 3
+
+executable linear-regression
+  hs-source-dirs:      examples/linear-regression
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -W -Wall -O2 -threaded -rtsopts
+  build-depends:       base >= 4.7 && < 5
+                     , hasktorch-gradually-typed
+                     , indexed
+                     , indexed-extras
+
+executable two-layer-network
+  hs-source-dirs:      examples/two-layer-network
+  main-is:             Main.hs
+  default-language:    Haskell2010
+  ghc-options:         -W -Wall -O2 -threaded -rtsopts
+  build-depends:       base >= 4.7 && < 5
+                     , containers
+                     , hasktorch-gradually-typed
+                     , lens
+                     , normaldistribution
+                     , mtl
+                     , pipes
+                     , pipes-concurrency
+                     , random
+                     , vector-sized
+                     , text
+
+executable neural-interpreter
+  hs-source-dirs:      examples/neural-interpreter
+  main-is:             Main.hs
+  other-modules:       Dataset
+                     , Model
+                     , STLC
+                     , Gen
+                     , Monitor
+                     , Opts
+  default-language:    Haskell2010
+  ghc-options:         -W -Wall -O2 -threaded -rtsopts
+  build-depends:       aeson
+                     , base >= 4.7 && < 5
+                     , bound
+                     , bytestring
+                     , containers
+                     , deriving-compat
+                     , hasktorch-gradually-typed
+                     , hashable >= 1.3.0.0 && < 1.5.0.0
+                     , hedgehog
+                     , indexed
+                     , indexed-extras
+                     , lens
+                     , mtl
+                     , optparse-applicative
+                     , pipes
+                     , pipes-concurrency
+                     , pipes-safe
+                     , random
+                     , SafeSemaphore
+                     , stm
+                     , template-haskell
+                     , terminal-progress-bar
+                     , text
+                     , tokenizers
+                     , transformers
+                     , unordered-containers
+
+test-suite spec
+  type:                exitcode-stdio-1.0
+  hs-source-dirs:      test
+  main-is:             Spec.hs
+  other-modules:       Torch.GraduallyTyped.TensorSpec
+                     , Torch.GraduallyTyped.IndexingSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GMultiHeadAttentionSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GFeedForwardNetworkSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GSelfAttentionSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GCrossAttentionSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GBlockSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GStackSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GTransformerSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GLMHeadSpec
+                     , Torch.GraduallyTyped.NN.Transformer.GEncoderOnlySpec
+                     , Torch.GraduallyTyped.NN.Transformer.GEncoderDecoderSpec
+                     , Torch.GraduallyTyped.NN.Transformer.T5Spec
+                     , Torch.GraduallyTyped.NN.Transformer.BARTSpec
+                     , Torch.GraduallyTyped.NN.Transformer.PegasusSpec
+                     , Torch.GraduallyTyped.NN.Transformer.BERTSpec
+                     , Torch.GraduallyTyped.NN.Transformer.RoBERTaSpec
+                     , Torch.GraduallyTyped.NN.TransformerSpec
+  default-language:    Haskell2010
+  ghc-options:         -Wall -fplugin GHC.TypeLits.Normalise -fplugin GHC.TypeLits.KnownNat.Solver -fplugin GHC.TypeLits.Extra.Solver -fconstraint-solver-iterations=0
+  build-depends:       base >= 4.7 && < 5
+                     , hasktorch-gradually-typed
+                     , ghc-typelits-extra
+                     , ghc-typelits-knownnat
+                     , ghc-typelits-natnormalise
+                     , QuickCheck
+                     , containers
+                     , exceptions
+                     , hedgehog
+                     , hedgehog-quickcheck
+                     , hspec
+                     , hspec-hedgehog
+                     , HUnit-approx
+                     , lens
+                     , mtl
+                     , tokenizers
+                     , vector
+                     , vector-sized
+  if impl(ghc >= 9.0)
+    build-depends:     singletons == 3.*
+                     , singletons-base
+                     , singletons-th
+  else
+    build-depends:     singletons < 3
+
+test-suite doctests
+  if os(darwin) || flag(disable-doctest)
+    Buildable: False
+  else
+    Buildable: True
+  type:                exitcode-stdio-1.0
+  main-is:             doctests.hs
+  ghc-options:         -Wall -threaded -fplugin GHC.TypeLits.Normalise -fplugin GHC.TypeLits.KnownNat.Solver -fplugin GHC.TypeLits.Extra.Solver -fconstraint-solver-iterations=0
+  default-language:    Haskell2010
+  build-depends:       base >= 4.7 && < 5
+                     , doctest >=0.16.0.1 && <0.21
+                     , hasktorch
+                     , libtorch-ffi == 2.0.*
+                     , ghc-typelits-extra
+                     , ghc-typelits-knownnat
+                     , ghc-typelits-natnormalise
+                     , typelevel-rewrite-rules
+                     , mtl
+                     , stm
+                     , containers
+                     , generics-sop
+                     , type-errors-pretty
+                     , indexed
+                     , indexed-extras
+                     , free
+                     , logict
+                     , parsers
+                     , HUnit-approx
+                     , tokenizers
+  if impl(ghc >= 9.0)
+    build-depends:     singletons == 3.*
+                     , singletons-base
+                     , singletons-th
+  else
+    build-depends:     singletons < 3
